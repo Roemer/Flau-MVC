@@ -2,10 +2,10 @@
 
 namespace models\Home;
 
-class ShowModel extends \BaseModel {
+class AboutModel extends \BaseModel {
 
     public function __construct() {
-        $this->PageTitle = 'Welcome';
+        $this->PageTitle = 'About';
     }
 
 }
