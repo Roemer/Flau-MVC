@@ -4,25 +4,22 @@ Flau-MVC
 Very simple and basic PHP MVC Framework
 
 ### Usage
-It's fairly simple to use the framework. As basic setup, you need to create the folders `classes`, `controllers`, `models`, `views`.
-Now upload the files `BaseController.php`, `BaseModel.php`, `Loader.php` and `Utilities.php` into the `classes` folder.
+It's fairly simple to use the framework. As basic setup, you need to create the folders `controllers`, `models`, `views`.
+Now upload the file `FlauMVC.inc.php` somwehere (like a `libs` folder).
 For a starting point, create an `index.php` file like
 ```php
 <?php
-include_once('./classes/Utilities.php');
-include_once('./classes/BaseController.php');
-include_once('./classes/BaseModel.php');
-include_once('./classes/Loader.php');
+include_once('./libs/FlauMVC.inc.php');
 
-$loader = new Loader();
-$loader->LoadFromUrl();
-$controller = $loader->CreateController();
-$controller->ExecuteAction($loader->Action);
+$loader = new FlauMVC\Loader();
+$loader->loadFromUrl();
+$controller = $loader->createController();
+$controller->executeAction($loader->Action);
 ```
 Now the controllers can be created. Simply create an `xxxController.php` in the `controllers` folder. It could look like this:
 ```php
 <?php
-class HomeController extends BaseController {
+class HomeController extends FlauMVC\BaseController {
     // Make sure to call the parent constructor
     public function __construct() {
         parent::__construct();
@@ -30,26 +27,26 @@ class HomeController extends BaseController {
 
     function Show() {
         $model = new ShowModel();
-        $this->OutputView('Show', $model);
+        $this->outputView('Show', $model);
     }
 
     function About() {
         $model = new AboutModel();
-        $this->OutputView('About', $model);
+        $this->outputView('About', $model);
     }
 }
 ```
 As you see, this controller has two methods with it's own view and model: `Show` and `About`
 These two `actions` need to have their own subfolder in `models` and `views`, so create them.
 For the models, you should now create an `AboutModel.php` and `ShowModel.php` in `views\Home`.
-The need to extend `BaseModel`. Here's an example how they could look.
+The need to extend `BaseViewModel`. Here's an example how they could look.
 ```php
-class AboutModel extends \BaseModel {
+class AboutModel extends FlauMVC\BaseViewModel {
     public function __construct() {
         $this->PageTitle = 'About';
     }
 }
-class ShowModel extends \BaseModel {
+class ShowModel extends FlauMVC\BaseViewModel {
     public function __construct() {
         $this->PageTitle = 'Welcome';
     }

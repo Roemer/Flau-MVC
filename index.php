@@ -1,11 +1,8 @@
 <?php
 
-include_once('./classes/Utilities.php');
-include_once('./classes/BaseController.php');
-include_once('./classes/BaseModel.php');
-include_once('./classes/Loader.php');
+include_once('./libs/FlauMVC.inc.php');
 
-$loader = new Loader();
-$loader->LoadFromUrl();
-$controller = $loader->CreateController();
-$controller->ExecuteAction($loader->Action);
+$loader = new FlauMVC\Loader();
+$loader->loadFromUrl();
+$controller = $loader->createController();
+$controller->executeAction($loader->Action);
